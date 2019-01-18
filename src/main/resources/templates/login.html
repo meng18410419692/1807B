@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+
+    <link href="/images/jd.ico" rel="shortcut icon" type="image/icon">
+    <link href="/css/login.css" rel="stylesheet" type="text/css">
+    <script src="/js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+    function to_submit(){
+
+        $.ajax({
+            url:"login",
+            type:"POST",
+            data:$("#login_form").serialize(),
+            success:function(pageUtil){
+                if(pageUtil==1){
+                   location.href="/toView?viewName=index"
+                }else{
+                    alert("用户名或者密码错误");
+                }
+
+            },
+            error:function(){
+                alert("失败了");
+            }
+        });
+
+
+    }
+
+
+
+</script>
+
+</head>
+<body>
+<div class="up">
+    <img height="45" class="hy_img" src="/images/meng.gif">
+    <div class="hy">
+        欢迎登录
+    </div>
+</div>
+<div class="middle">
+    <div class="login">
+        <div class="l1 ">
+            <div class="l1_font_01 ">硅谷会员</div>
+            <a class="l1_font_02 " href="<%=application.getContextPath() %>/to_regist.action">用户注册</a>
+        </div>
+        <div class="blank_01"></div>
+        <div class="ts">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${err}
+        </div>
+        <div class="blank_01"></div>
+        <form id="login_form"  method="post">
+            <div class="input1">
+                <input th:value="${username}" name="loginacct" class="input1_01" type="text">
+            </div>
+            <div class="blank_01"></div>
+            <div class="blank_01"></div>
+            <div class="input2">
+                <input th:value="${password}" name="userpswd" class="input1_01" type="text">
+            </div>
+
+        <div class="blank_01"></div>
+        <div class="blank_01"></div>
+        <div class="box_01">
+            <input class="box_01_box" type="checkbox" th:checked="${password}==null?'false':'checked'" name="rempwd">
+            <div class="box_01_both">
+                <div class="box_01_both_1">记住密码</div>
+                <div class="box_01_both_2">忘记密码？</div>
+            </div>
+        </div>
+        </form>
+        <div class="blank_01"></div>
+        <a class="aline" href="#">
+            <div class="red_button" onclick="to_submit()">
+                登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录
+            </div>
+        </a>
+        <div class="blank_01"></div>
+        <div class="blank_01"></div>
+        <div class="box_down">
+            <div class="box_down_1">使用合作网站账号登录京东：</div>
+            <div class="box_down_1">京东钱包&nbsp;&nbsp;|&nbsp;&nbsp;QQ
+                &nbsp;&nbsp;|&nbsp;&nbsp;微信
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="down">
+    <br>
+    Copyright©2004-2015  xu.jb.com 版权所有
+</div>
+
+
+</body>
+</html>
